@@ -49,7 +49,7 @@ func (s *sessionService) TokenValidity(token string) (model.Session, error) {
 	if s.TokenExpired(session) {
 		err := s.sessionRepository.DeleteSession(token)
 		if err != nil {
-			return fmt.Errorf("error deleting session: %v", err)
+			return model.Session{}, err
 		}
 		return model.Session{}, fmt.Errorf("Token is Expired!")
 	}
